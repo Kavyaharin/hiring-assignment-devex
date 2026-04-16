@@ -1,16 +1,15 @@
+using DeploymentRegistry.Api.Configuration;
+using DeploymentRegistry.Api.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.Configure<MongoDbSettings>(
+    builder.Configuration.GetSection("MongoDb"));
 
+builder.Services.AddSingleton<IDeploymentService, DeploymentService>();
 builder.Services.AddControllers();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
 
 app.MapControllers();
 
