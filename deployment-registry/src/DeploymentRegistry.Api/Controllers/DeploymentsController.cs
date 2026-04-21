@@ -38,6 +38,7 @@ public class DeploymentsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Deployment>> Create([FromBody] Deployment deployment)
     {
+        deployment.Id = null;
         deployment.StartedAt = DateTime.UtcNow;
         var created = await _deploymentService.CreateAsync(deployment);
         return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
@@ -46,12 +47,11 @@ public class DeploymentsController : ControllerBase
     [HttpPut("{id}")]
     public async Task<ActionResult<Deployment>> Update(string id, [FromBody] Deployment deployment)
     {
-        var existing = await _deploymentService.GetByIdAsync(id);
-        if (existing is null)
-            return NotFound();
-
         deployment.Id = id;
         var updated = await _deploymentService.UpdateAsync(id, deployment);
+        if (updated is null)
+            return NotFound();
+
         return Ok(updated);
     }
 }

@@ -3,8 +3,13 @@ using DeploymentRegistry.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<MongoDbSettings>(
-    builder.Configuration.GetSection("MongoDb"));
+builder.Services
+    .AddOptions<MongoDbSettings>()
+    .Bind(builder.Configuration.GetSection("MongoDb"))
+    .Validate(s => !string.IsNullOrWhiteSpace(s.ConnectionString), "MongoDb:ConnectionString is required.")
+    .Validate(s => !string.IsNullOrWhiteSpace(s.DatabaseName), "MongoDb:DatabaseName is required.")
+    .Validate(s => !string.IsNullOrWhiteSpace(s.CollectionName), "MongoDb:CollectionName is required.")
+    .ValidateOnStart();
 
 builder.Services.AddSingleton<IDeploymentService, DeploymentService>();
 builder.Services.AddControllers();

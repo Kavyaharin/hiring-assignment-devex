@@ -1,6 +1,7 @@
 using DeploymentRegistry.Api.Configuration;
 using DeploymentRegistry.Api.Models;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace DeploymentRegistry.Api.Services;
@@ -35,6 +36,9 @@ public class DeploymentService : IDeploymentService
 
     public async Task<Deployment?> GetByIdAsync(string id)
     {
+        if (!ObjectId.TryParse(id, out _))
+            return null;
+
         return await _deployments.Find(d => d.Id == id).FirstOrDefaultAsync();
     }
 
@@ -46,6 +50,9 @@ public class DeploymentService : IDeploymentService
 
     public async Task<Deployment?> UpdateAsync(string id, Deployment deployment)
     {
+        if (!ObjectId.TryParse(id, out _))
+            return null;
+
         // NOTE: This intentionally does NO validation on field consistency.
         // It blindly replaces the document with whatever the caller sends.
         // For example, it does not check whether FinishedAt is set appropriately
