@@ -10,7 +10,7 @@ The Deployment Registry API source code is in the `deployment-registry/` directo
 
 ## Before You Start
 
-**You are welcome and encouraged to use AI tools** (Copilot, ChatGPT, Claude, etc.) during this assignment. We use AI daily in our work and consider it a valuable skill. What matters is that you **understand what you've built** and can explain your decisions during the interview. We will ask you to walk through your code, discuss trade-offs, and explain why you made certain choices.
+**You are welcome and encouraged to use AI tools** during this assignment. We use AI daily in our work and consider it a valuable skill. What matters is that you **understand what you've built** and can explain your decisions during the interview. We will ask you to walk through your code, discuss trade-offs, and explain why you made certain choices.
 
 **Time expectation:** This assignment is designed to take approximately **4 hours**. There is a mandatory core path and optional extension tracks — focus on what you're strongest at. You do not need to complete everything.
 
@@ -111,6 +111,19 @@ Write Terraform to provision the infrastructure needed to run the services.
 - Contract tests between your service and the Registry API
 - Fault injection: what happens when MongoDB dies? The Registry returns 500s? Slow responses?
 - **Bonus:** retry with exponential backoff and circuit breaker
+
+### Track F: Local Developer Experience
+
+Make this repo pleasant for the next developer who clones it.
+
+- A `Makefile` (or `justfile`, `Taskfile`, etc.) that wraps common workflows in memorable commands: `make up`, `make test`, `make seed`, `make lint`, `make clean` — whatever feels right for this project
+- Quality checks that run locally and in CI: formatting, linting, static analysis for whichever language you picked
+- Pre-commit hooks (e.g. `pre-commit`, `husky`, or `lefthook`) that run the relevant subset of checks before a commit lands
+- Agent guidelines — an `AGENTS.md`, `CLAUDE.md`, or similar file that tells a coding agent how this repo is structured, how to run things, and what conventions to follow
+- A short onboarding section in the README: "here's how a new dev gets productive in 10 minutes"
+- **Bonus:** a devcontainer or Nix flake so the environment is reproducible without "works on my machine" problems
+
+> This track mirrors a lot of what our team actually spends time on. We care about the small daily frictions that compound across an engineering organisation.
 
 ### Stretch Goal: Redis Caching
 
