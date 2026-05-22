@@ -2,7 +2,7 @@ import axios from "axios";
 import axiosRetry from "axios-retry";
 
 const registryClient = axios.create({
-  baseURL: "http://localhost:5176/api",
+  baseURL: process.env.REGISTRY_API_URL || "http://deployment-registry:8080",
   timeout: 3000
 });
 
@@ -12,6 +12,6 @@ axiosRetry(registryClient, {
 });
 
 export async function getDeployments() {
-  const response = await registryClient.get("/deployments");
+  const response = await registryClient.get("/api/deployments");
   return response.data;
 }

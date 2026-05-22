@@ -154,3 +154,49 @@ During the interview (~90 minutes), you'll:
 - **Talk about** what you'd do differently in a production environment
 
 We're evaluating problem-solving, technical depth, communication, and how you approach unfamiliar systems — not whether you completed every task perfectly.
+
+---
+
+# Solution Overview
+
+This implementation provides:
+
+- Deployment Registry API (.NET)
+- Deployment Insights API (Node.js / TypeScript)
+- MongoDB
+- Docker Compose local environment
+
+The implementation intentionally prioritizes:
+
+- simple architecture
+- operational clarity
+- interview explainability
+- reproducible local setup
+- maintainable service boundaries
+
+---
+
+# Services
+
+| Service | Port |
+| --- | --- |
+| Deployment Registry API | 7080 |
+| Deployment Insights API | 7081 |
+| MongoDB | 27017 |
+
+---
+
+# Architecture
+
+Client
+   |
+   v
+Insights API ---> Registry API ---> MongoDB
+
+---
+
+# Run Locally
+
+```bash
+docker compose up --build
+```
