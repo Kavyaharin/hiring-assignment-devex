@@ -1,9 +1,6 @@
 {
   "name": "devex-assignment",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
-  "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
-  },
   "postCreateCommand": "cd deployment-insights && npm install",
   "customizations": {
     "vscode": {
