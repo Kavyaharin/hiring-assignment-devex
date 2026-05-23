@@ -6,3 +6,5 @@ export interface Deployment {
   startedAt: string;
   finishedAt?: string;
 }
+
+const test: any = {};
