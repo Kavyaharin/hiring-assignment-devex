@@ -1,6 +1,7 @@
 import { getDeployments } from "../clients/registryClient";
 import { calculateFrequency } from "../utils/frequency";
 import { calculateFailureRate } from "../utils/failureRate";
+import { Deployment } from "../types/deployment";
 
 export async function getDeploymentFrequency() {
   const deployments = await getDeployments();
@@ -12,7 +13,7 @@ export async function getLeadTime() {
   const deployments = await getDeployments();
 
   const successfulDeployments = deployments.filter(
-    (deployment: any) =>
+    (deployment: Deployment) =>
       deployment.status === "Succeeded" &&
       deployment.startedAt &&
       deployment.finishedAt
@@ -57,7 +58,10 @@ export async function getFailureRate() {
 export async function getLatestDeployments() {
   const deployments = await getDeployments();
 
-  const latest: Record<string, any> = {};
+  const latest: Record<
+    string,
+    { version: string; startedAt: string }
+  > = {};
 
   for (const deployment of deployments) {
     const key = `${deployment.serviceName}-${deployment.environment}`;

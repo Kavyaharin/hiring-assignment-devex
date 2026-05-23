@@ -1,6 +1,8 @@
 // src/utils/failureRate.ts
 
-export function calculateFailureRate(deployments: any[]) {
+import { Deployment } from "../types/deployment";
+
+export function calculateFailureRate(deployments: Deployment[]) {
   const grouped: Record<
     string,
     { total: number; failures: number }
