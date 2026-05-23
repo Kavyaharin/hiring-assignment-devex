@@ -8,6 +8,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 7081
+EXPOSE 3000
 
-CMD ["npx", "ts-node", "src/server.ts"]
+CMD ["npx", "ts-node", "./src/server.ts"]

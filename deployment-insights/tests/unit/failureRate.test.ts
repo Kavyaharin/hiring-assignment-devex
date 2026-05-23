@@ -6,17 +6,23 @@ describe("calculateFailureRate", () => {
       {
         serviceName: "payments",
         environment: "prod",
-        status: "Succeeded"
+        version: "1.0.0",
+        status: "Succeeded",
+        startedAt: "2026-05-23T10:00:00Z"
       },
       {
         serviceName: "payments",
         environment: "prod",
-        status: "Failed"
+        version: "1.0.1",
+        status: "Failed",
+        startedAt: "2026-05-23T11:00:00Z"
       },
       {
         serviceName: "payments",
         environment: "prod",
-        status: "RolledBack"
+        version: "1.0.2",
+        status: "RolledBack",
+        startedAt: "2026-05-23T12:00:00Z"
       }
     ];
 

@@ -1,6 +1,7 @@
 import express from "express";
 import insightsRouter from "./routes/insights";
 import { getDeployments } from "./clients/registryClient";
+import { errorHandler } from "./middleware/errorHandler";
 
 const app = express();
 
@@ -21,5 +22,7 @@ app.get("/health", async (_, res) => {
 });
 
 app.use("/insights", insightsRouter);
+
+app.use(errorHandler);
 
 export default app;
