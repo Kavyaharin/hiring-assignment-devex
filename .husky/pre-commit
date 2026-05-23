@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
 
+cd deployment-insights
+
 npm run lint
 npm test
