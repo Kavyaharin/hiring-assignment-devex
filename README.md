@@ -2,6 +2,8 @@
 
 Stateless deployment analytics microservice
 
+---
+
 ## Architecture
 
 ```text
@@ -12,6 +14,8 @@ Deployment Registry API (.NET)
 Deployment Insights API (Node.js / TypeScript)
 ```
 
+---
+
 ## Services
 
 | Service | Technology | Port | Purpose |
@@ -19,6 +23,8 @@ Deployment Insights API (Node.js / TypeScript)
 | deployment-registry | .NET + MongoDB | 7080 | Source deployment API |
 | deployment-insights | Node.js + TypeScript | 7081 | Aggregation and analytics API |
 | MongoDB | MongoDB | 27017 | Persistence layer |
+
+---
 
 ## Prerequisites
 
@@ -28,6 +34,42 @@ Deployment Insights API (Node.js / TypeScript)
 | Docker Compose | Latest |
 | Node.js | 20+ |
 | VS Code Dev Containers | Optional |
+
+---
+
+## Quick Onboarding
+
+A new developer can get the project running in a few minutes using either:
+
+- Docker Compose
+- VS Code Devcontainer
+
+Recommended setup:
+
+```bash
+docker-compose up --build
+```
+
+This starts:
+
+- MongoDB
+- Deployment Registry API
+- Deployment Insights API
+
+---
+
+## Docker Compose
+
+Starts MongoDB, Deployment Registry API, and Deployment Insights API.
+
+| Action | Command |
+|---|---|
+| Start services | `docker-compose up --build` |
+| Run in background | `docker-compose up -d` |
+| Stop services | `docker-compose down` |
+| View logs | `docker-compose logs -f` |
+
+---
 
 ## Development & Validation Workflow
 
@@ -64,15 +106,7 @@ curl http://localhost:7081/insights/latest
 
 ---
 
-## Docker Compose
-
-Starts MongoDB, Deployment Registry API, and Deployment Insights API.
-
-```bash
-docker-compose up --build
-```
-
-## Endpoint Selection
+## Implemented Endpoints & Purpose
 
 | Endpoint | Description |
 |---|---|
@@ -82,6 +116,8 @@ docker-compose up --build
 | GET /insights/failure-rate | Failure and rollback rate |
 | GET /insights/latest | Latest deployed version per service/environment |
 
+---
+
 ## Testing
 
 | Action            | Command                    |
@@ -90,7 +126,20 @@ docker-compose up --build
 | Linting           | `npm run lint`             |
 | Integration Tests | `npm run test:integration` |
 
-# Devcontainer Support
+---
+
+## CI/CD
+
+| Workflow | Purpose |
+|---|---|
+| GitHub Actions | Continuous integration pipeline |
+| Automated Tests | Validate aggregation and integration logic |
+| Docker Image Build | Container packaging |
+| GHCR Publishing | Container registry publishing |
+
+---
+
+## Devcontainer Support
 
 This repository includes a VS Code Dev Container configuration for a fully reproducible development environment.
 
@@ -113,7 +162,9 @@ The environment will automatically provision:
 
 This enables contributors to start developing without manual local environment setup.
 
-# Developer Experience Improvements
+---
+
+## Developer Experience Improvements
 
 | Improvement | Description |
 |---|---|
@@ -125,7 +176,9 @@ This enables contributors to start developing without manual local environment s
 | Strict TypeScript | Improved type safety |
 | Repository Cleanup | Removed generated artifacts and redundant files |
 
-# Assumptions & Tradeoffs
+---
+
+## Assumptions & Tradeoffs
 
 | Area | Decision |
 |---|---|
@@ -133,19 +186,13 @@ This enables contributors to start developing without manual local environment s
 | Data Source | Registry API acts as single source of truth |
 | Scope Prioritization | Focused on operational baseline and developer experience |
 
-## Additional Improvements
+---
+
+## Additional Improvements(With More Time)
 
 - Redis caching for Registry API responses
-- Prometheus metrics and observability
 - Kubernetes deployment manifests
 - Retry and resilience handling
 
-## CI/CD
 
-| Workflow | Purpose |
-|---|---|
-| GitHub Actions | Continuous integration pipeline |
-| Automated Tests | Validate aggregation and integration logic |
-| Docker Image Build | Container packaging |
-| GHCR Publishing | Container registry publishing |
 
