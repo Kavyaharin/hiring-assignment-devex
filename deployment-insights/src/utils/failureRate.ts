@@ -2,10 +2,16 @@
 
 import { Deployment } from "../types/deployment";
 
-export function calculateFailureRate(deployments: Deployment[]) {
+export function calculateFailureRate(
+  deployments: Deployment[]
+) {
   const grouped: Record<
     string,
-    { total: number; failures: number }
+    {
+      total: number;
+      failed: number;
+      rolledBack: number;
+    }
   > = {};
 
   for (const deployment of deployments) {
@@ -14,28 +20,45 @@ export function calculateFailureRate(deployments: Deployment[]) {
     if (!grouped[key]) {
       grouped[key] = {
         total: 0,
-        failures: 0
+        failed: 0,
+        rolledBack: 0
       };
     }
 
-    grouped[key].total += 1;
+    grouped[key].total++;
 
-    if (
-      deployment.status === "Failed" ||
-      deployment.status === "RolledBack"
-    ) {
-      grouped[key].failures += 1;
+    if (deployment.status === "Failed") {
+      grouped[key].failed++;
+    }
+
+    if (deployment.status === "RolledBack") {
+      grouped[key].rolledBack++;
     }
   }
 
-  const result: Record<string, number> = {};
+  const result: Record<
+    string,
+    {
+      failureRate: number;
+      rollbackRate: number;
+    }
+  > = {};
 
   for (const key in grouped) {
-    const item = grouped[key];
+    const stats = grouped[key];
 
-    result[key] = Number(
-      ((item.failures / item.total) * 100).toFixed(2)
+    const failureRate = Number(
+      ((stats.failed / stats.total) * 100).toFixed(2)
     );
+
+    const rollbackRate = Number(
+      ((stats.rolledBack / stats.total) * 100).toFixed(2)
+    );
+
+    result[key] = {
+      failureRate,
+      rollbackRate
+    };
   }
 
   return result;

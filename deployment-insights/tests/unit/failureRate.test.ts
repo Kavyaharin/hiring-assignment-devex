@@ -1,7 +1,7 @@
 import { calculateFailureRate } from "../../src/utils/failureRate";
 
 describe("calculateFailureRate", () => {
-  it("calculates failure percentage per service/environment", () => {
+  it("calculates failure and rollback percentage per service/environment", () => {
     const deployments = [
       {
         serviceName: "payments",
@@ -29,7 +29,10 @@ describe("calculateFailureRate", () => {
     const result = calculateFailureRate(deployments);
 
     expect(result).toEqual({
-      "payments-prod": 66.67
+      "payments-prod": {
+        failureRate: 33.33,
+        rollbackRate: 33.33
+      }
     });
   });
 });

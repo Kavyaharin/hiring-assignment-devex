@@ -29,7 +29,7 @@ router.get("/lead-time", async (_, res, next) => {
   }
 });
 
-// Deployment failure-rate metrics
+// Deployment failure-rate and rollback metrics
 router.get("/failure-rate", async (_, res, next) => {
   try {
     const data = await getFailureRate();
