@@ -1,10 +1,13 @@
 services:
+
+  # MongoDB database
   mongodb:
     image: mongo:7
     container_name: mongodb
     ports:
       - "27017:27017"
 
+  # Deployment Registry API
   deployment-registry:
     build:
       context: .
@@ -18,6 +21,7 @@ services:
     depends_on:
       - mongodb
 
+  # Deployment Insights API
   deployment-insights:
     build:
       context: ./deployment-insights

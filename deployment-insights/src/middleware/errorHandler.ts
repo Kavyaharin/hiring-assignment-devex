@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import axios from "axios";
 
+// Centralized error handling middleware
 export function errorHandler(
   err: Error,
   _: Request,

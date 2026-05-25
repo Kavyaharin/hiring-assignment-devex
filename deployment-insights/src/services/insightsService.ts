@@ -27,6 +27,7 @@ export async function getLeadTime() {
     const started = new Date(deployment.startedAt).getTime();
     const finished = new Date(deployment.finishedAt).getTime();
 
+    // Calculate deployment duration in minutes
     const durationMinutes = (finished - started) / 1000 / 60;
 
     if (!grouped[service]) {

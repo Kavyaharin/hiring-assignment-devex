@@ -9,6 +9,7 @@ import {
 
 const router = Router();
 
+// Deployment frequency metrics
 router.get("/frequency", async (_, res, next) => {
   try {
     const data = await getDeploymentFrequency();
@@ -18,6 +19,7 @@ router.get("/frequency", async (_, res, next) => {
   }
 });
 
+// Deployment lead-time metrics
 router.get("/lead-time", async (_, res, next) => {
   try {
     const data = await getLeadTime();
@@ -27,6 +29,7 @@ router.get("/lead-time", async (_, res, next) => {
   }
 });
 
+// Deployment failure-rate metrics
 router.get("/failure-rate", async (_, res, next) => {
   try {
     const data = await getFailureRate();
@@ -36,6 +39,7 @@ router.get("/failure-rate", async (_, res, next) => {
   }
 });
 
+// Latest deployment details per service/environment
 router.get("/latest", async (_, res, next) => {
   try {
     const data = await getLatestDeployments();
