@@ -4,6 +4,12 @@ Stateless deployment analytics microservice
 
 ---
 
+## What it does
+
+This service consumes deployment data from the Registry API and provides aggregated deployment insights such as deployment frequency, lead time, failure rates, and latest deployment versions across environments through stateless REST endpoints.
+
+---
+
 ## Architecture
 
 ```text
